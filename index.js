@@ -12,7 +12,9 @@ var buffer;
 
 function genEther(buffer) {
   var privateKey = buffer;
+  // https://github.com/ethereumjs/ethereumjs-util/blob/master/index.js#L357
   var publicKey = ethUtil.privateToPublic(privateKey);
+  // https://github.com/ethereumjs/ethereumjs-util/blob/master/index.js#L345
   var address = ethUtil.publicToAddress(publicKey);
   var wallet = EthWallet.fromPrivateKey(privateKey).toV3String('test');
 
@@ -41,9 +43,11 @@ const Nacl = require("js-nacl");
 const lisk = require('lisk-js');
 
 function genLisk(nacl, buffer) {
+  // https://github.com/LiskHQ/lisk-js/blob/development/lib/transactions/crypto.js#L286
   var keyPair = nacl.crypto_sign_keypair_from_seed(buffer);
   var privateKey = new Buffer(keyPair.signSk);
   var publicKey = new Buffer(keyPair.signPk);
+  // https://github.com/LiskHQ/lisk-js/blob/development/lib/transactions/crypto.js#L294
   var address = lisk.crypto.getAddress(publicKey);
 
   console.log(`Private key: ${privateKey.toString('hex')}`);
